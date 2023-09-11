@@ -2218,15 +2218,15 @@ ol {
 }
 
 .features .single-features {
-  width: 60%;
+  width: 100%;
   text-align: center;
-  padding: 35px;
+  padding: 50px;
   background-image: url('/assets/images/hero/images4.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   border-radius: 6px;
   position: relative;
-  transform: translate(35%, 50%);
+  transform: translate(0%, 50%);
   margin-top: 30px;
   border: 1px solid #eee;
   -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;

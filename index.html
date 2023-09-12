@@ -10,19 +10,1625 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap.min.css" /> -->
+    <!-- <link rel="stylesheet" href="assets/css/main.css" /> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+        
+(function () {
+    //===== Prealoder
+
+    window.onload = function () {
+        window.setTimeout(fadeout, 500);
+    }
+
+    function fadeout() {
+        document.querySelector('.preloader').style.opacity = '0';
+        document.querySelector('.preloader').style.display = 'none';
+    }
+
+
+    /*=====================================
+    Sticky
+    ======================================= */
+    window.onscroll = function () {
+        var header_navbar = document.querySelector(".navbar-area");
+        var sticky = header_navbar.offsetTop;
+
+        var logo = document.querySelector('.navbar-brand img')
+        if (window.pageYOffset > sticky) {
+          header_navbar.classList.add("sticky");
+          logo.src = 'assets/images/logo/logo.svg';
+        } else {
+          header_navbar.classList.remove("sticky");
+          logo.src = 'assets/images/logo/white-logo.svg';
+        }
+
+        // show or hide the back-top-top button
+        var backToTo = document.querySelector(".scroll-top");
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            backToTo.style.display = "flex";
+        } else {
+            backToTo.style.display = "none";
+        }
+    };
+
+
+    
+    // section menu active
+	function onScroll(event) {
+		var sections = document.querySelectorAll('.page-scroll');
+		var scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+
+		for (var i = 0; i < sections.length; i++) {
+			var currLink = sections[i];
+			var val = currLink.getAttribute('href');
+			var refElement = document.querySelector(val);
+			var scrollTopMinus = scrollPos + 73;
+			if (refElement.offsetTop <= scrollTopMinus && (refElement.offsetTop + refElement.offsetHeight > scrollTopMinus)) {
+				document.querySelector('.page-scroll').classList.remove('active');
+				currLink.classList.add('active');
+			} else {
+				currLink.classList.remove('active');
+			}
+		}
+	};
+
+    window.document.addEventListener('scroll', onScroll);
+    
+    // for menu scroll 
+    var pageLink = document.querySelectorAll('.page-scroll');
+
+    pageLink.forEach(elem => {
+        elem.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector(elem.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth',
+                offsetTop: 1 - 60,
+            });
+        });
+    });
+
+    // WOW active
+    new WOW().init();
+
+    let filterButtons = document.querySelectorAll('.portfolio-btn-wrapper button');
+    filterButtons.forEach(e =>
+        e.addEventListener('click', () => {
+
+            let filterValue = event.target.getAttribute('data-filter');
+            iso.arrange({
+                filter: filterValue
+            });
+        })
+    );
+
+    var elements = document.getElementsByClassName("portfolio-btn");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].onclick = function () {
+            var el = elements[0];
+            while (el) {
+                if (el.tagName === "BUTTON") {
+                    el.classList.remove("active");
+                }
+                el = el.nextSibling;
+            }
+            this.classList.add("active");
+        };
+    };
+
+    //===== mobile-menu-btn
+    let navbarToggler = document.querySelector(".mobile-menu-btn");
+    navbarToggler.addEventListener('click', function () {
+        navbarToggler.classList.toggle("active");
+    });
+
+
+})();
+
+
+    </script>
+    <style>
+        
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  color: #888;
+  overflow-x: hidden;
+  font-size: 15px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-toggler:focus,
+a:focus,
+input:focus,
+textarea:focus,
+button:focus,
+.btn:focus,
+.btn.focus,
+.btn:not(:disabled):not(.disabled).active,
+.btn:not(:disabled):not(.disabled):active {
+  text-decoration: none;
+  outline: none;
+  outline: none !important;
+  border-color: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+span,
+a {
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+}
+
+img {
+  vertical-align: middle;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  margin: 0px;
+  color: #081828;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: inherit;
+}
+
+h1 {
+    vertical-align: middle;
+  font-size: 50px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 25px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 16px;
+}
+ol {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+
+.img-bg {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .container {
+    width: 450px;
+  }
+}
+
+/* Bread Crumbs */
+.breadcrumbs {
+  position: relative;
+  padding-bottom: 100px;
+  padding-top: 180px;
+  z-index: 2;
+  text-align: left;
+  background-color: #ff6b81;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .breadcrumbs {
+    padding-bottom: 60px;
+    padding-top: 120px;
+  }
+}
+
+@media (max-width: 767px) {
+  .breadcrumbs {
+    padding-bottom: 60px;
+    padding-top: 120px;
+  }
+}
+
+.breadcrumbs .breadcrumbs-content {
+  position: relative;
+  text-align: center;
+}
+
+.breadcrumbs .breadcrumbs-content .page-title {
+  font-size: 32px;
+  color: #fff;
+  font-weight: 700;
+  position: relative;
+  line-height: 50px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .breadcrumbs .breadcrumbs-content .page-title {
+    font-size: 28px;
+    line-height: 42px;
+  }
+}
+
+@media (max-width: 767px) {
+  .breadcrumbs .breadcrumbs-content .page-title {
+    font-size: 25px;
+    line-height: 38px;
+  }
+}
+
+.breadcrumbs .breadcrumbs-content .breadcrumb-nav {
+  background: transparent;
+  border-radius: 0;
+  margin-bottom: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.breadcrumbs .breadcrumb-nav {
+  text-align: center;
+  margin-top: 15px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .breadcrumbs .breadcrumb-nav {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .breadcrumbs .breadcrumb-nav {
+    margin-top: 8px;
+  }
+}
+
+.breadcrumbs .breadcrumb-nav li {
+  display: inline-block;
+  position: relative;
+  padding-right: 15px;
+  margin-right: 15px;
+  text-transform: capitalize;
+}
+
+.breadcrumbs .breadcrumb-nav li:after {
+  content: "\ea5c";
+  font-family: lineIcons;
+  font-size: 10px;
+  position: absolute;
+  top: 4px;
+  right: -7px;
+}
+
+.breadcrumbs .breadcrumb-nav li:last-child {
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs .breadcrumb-nav li:last-child::after {
+  display: none;
+}
+
+.breadcrumbs .breadcrumb-nav li,
+.breadcrumbs .breadcrumb-nav li a {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.breadcrumbs .breadcrumb-nav li a {
+  position: relative;
+}
+
+.breadcrumbs .breadcrumb-nav li a:hover {
+  text-decoration: underline;
+}
+
+.sections {
+  padding-bottom: 100px;
+  position: relative;
+}
+.section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: relative;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
+
+/* Section Title */
+.section-title {
+  text-align: center;
+  margin-bottom: 80px;
+  /* padding: 0 300px; */
+  position: relative;
+  z-index: 5;
+}
+
+.section-title h3 {
+  font-size: 15px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+  color: #ff6b81;
+  text-transform: uppercase;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+  line-height: 42px;
+  text-transform: capitalize;
+  position: relative;
+  font-weight: 800;
+}
+
+.section-title p {
+  font-size: 15px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .section-title {
+    padding: 0px 200px;
+    margin-bottom: 70px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .section-title {
+    padding: 0px 20px;
+    margin-bottom: 70px;
+  }
+  .section-title h3 {
+    font-size: 14px;
+  }
+  .section-title h2 {
+    font-size: 24px;
+    line-height: 32px;
+    margin-bottom: 20px;
+  }
+  .section-title p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-title {
+    padding: 0px 10px;
+    margin-bottom: 60px;
+  }
+  .section-title h3 {
+    font-size: 14px;
+  }
+  .section-title h2 {
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 18px;
+  }
+  .section-title p {
+    font-size: 14px;
+  }
+}
+
+.section-title.align-right {
+  padding: 0;
+  padding-left: 600px;
+}
+
+.section-title.align-right h2:before {
+  display: none;
+}
+
+.section-title.align-right h2:after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 50px;
+  background: #ff6b81;
+  content: "";
+}
+
+.section-title.align-left {
+  padding: 0;
+  padding-right: 600px;
+}
+
+.section-title.align-left h2:before {
+  left: 0;
+  margin-left: 0;
+}
+/* Overlay */
+.overlay {
+  position: relative;
+  z-index: 1;
+}
+
+.overlay::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  background: #081828;
+  content: "";
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+/* Pagination CSS */
+.pagination {
+  text-align: left;
+  margin: 40px 0 0 0;
+  display: block;
+}
+
+.pagination.center {
+  text-align: center;
+}
+
+.pagination.right {
+  text-align: right;
+}
+
+.pagination.left {
+  text-align: left;
+}
+
+.pagination .pagination-list {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.pagination .pagination-list li {
+  margin-right: 5px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.pagination .pagination-list li:last-child {
+  margin-right: 0px;
+}
+
+.pagination .pagination-list li a {
+  background: #fff;
+  color: #081828;
+  font-weight: 400;
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 8px 20px;
+  text-align: center;
+  border: 1px solid #eee;
+}
+
+.pagination .pagination-list li.active a,
+.pagination .pagination-list li:hover a {
+  background: #ff6b81;
+  color: #fff;
+  border-color: transparent;
+}
+
+.pagination .pagination-list li a i {
+  font-size: 13px;
+}
+
+.blog-grids.pagination {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.button .btn {
+  display: inline-block;
+  text-transform: capitalize;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 30px;
+  background-color: #ff6b81;
+  color: #fff;
+  border: none;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+  margin-right: 7px;
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .button .btn {
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 767px) {
+  .button .btn {
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.button .btn i {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.button .btn:last-child {
+  margin: 0;
+}
+
+.button .btn:hover {
+  color: #fff;
+  background-color: #081828;
+  -webkit-box-shadow: 0px 4px 4px #0000000f;
+          box-shadow: 0px 4px 4px #0000000f;
+}
+
+.button .btn-alt {
+  color: #fff !important;
+  background: transparent !important;
+  border: 2px solid #fff;
+  padding: 11px 30px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .button .btn-alt {
+    padding: 10px 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .button .btn-alt {
+    padding: 10px 30px;
+  }
+}
+
+.button .btn-alt:hover {
+  background-color: #fff !important;
+  color: #ff6b81 !important;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+/* Preloader */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999999;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.preloader-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.preloader-icon {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  padding: 0px;
+}
+
+.preloader-icon span {
+  position: absolute;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background: #ff6b81;
+  -webkit-animation: preloader-fx 1.6s linear infinite;
+  animation: preloader-fx 1.6s linear infinite;
+}
+
+.preloader-icon span:last-child {
+  animation-delay: -0.8s;
+  -webkit-animation-delay: -0.8s;
+}
+
+@keyframes preloader-fx {
+  0% {
+    -webkit-transform: scale(0, 0);
+            transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes preloader-fx {
+  0% {
+    -webkit-transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+    opacity: 0;
+  }
+}
+
+.sticky .navbar .navbar-nav .nav-item .sub-menu a.active {
+  color: #fff;
+}
+
+.sticky .navbar .mobile-menu-btn .toggler-icon {
+  background: #333;
+}
+
+/*===== NAVBAR =====*/
+.navbar-area {
+  width: 100%;
+  z-index: 99;
+  -webkit-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  padding: 0;
+}
+
+.navbar-area.sticky {
+  position: fixed;
+  z-index: 99;
+  background: #ff6b81;
+  -webkit-box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.05);
+  -webkit-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  background: #fff;
+  padding: 0px 0;
+}
+
+.navbar {
+  padding: 0;
+  position: relative;
+  -webkit-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+
+.navbar-brand {
+  padding-left: 0;
+  border-radius: 0;
+}
+
+.mobile-menu-btn {
+  padding: 0px;
+}
+
+.mobile-menu-btn:focus {
+  text-decoration: none;
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.mobile-menu-btn .toggler-icon {
+  width: 30px;
+  height: 2px;
+  background-color: #222;
+  display: block;
+  margin: 5px 0;
+  position: relative;
+  -webkit-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+
+.mobile-menu-btn.active .toggler-icon:nth-of-type(1) {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  top: 7px;
+}
+
+.mobile-menu-btn.active .toggler-icon:nth-of-type(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active .toggler-icon:nth-of-type(3) {
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+  top: -7px;
+}
+
+.navbar-nav .nav-item {
+  z-index: 1;
+  position: relative;
+  margin-right: 40px;
+}
+
+.navbar-nav .nav-item:last-child {
+  margin-right: 0 !important;
+}
+
+.navbar-nav .nav-item:hover a {
+  color: #fff;
+}
+
+.sticky .navbar-nav .nav-item:hover a {
+  color: #ff6b81;
+}
+
+.navbar-nav .nav-item a {
+  font-size: 15px;
+  color: #fff;
+  -webkit-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  position: relative;
+  padding: 35px 0;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 600;
+  transition: all 0.3s ease-out 0s;
+  position: relative;
+  text-transform: capitalize;
+}
+
+.navbar-nav .nav-item a::after {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.navbar-nav .nav-item:hover a:before {
+  width: 100%;
+}
+
+.navbar-nav .nav-item a.active {
+  color: #fff;
+}
+
+.navbar-nav .nav-item a.dd-menu::after {
+  content: "\ea58";
+  font: normal normal normal 1em/1 "LineIcons";
+  position: absolute;
+  right: 17px;
+  font-size: 10px;
+  top: 50%;
+  margin-left: 5px;
+  margin-top: 0px;
+  -webkit-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  height: 10px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .navbar-nav .nav-item a.dd-menu::after {
+    right: 13px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .navbar-nav .nav-item a.dd-menu::after {
+    top: 18px;
+    right: 0;
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .navbar-nav .nav-item a.collapsed::after {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+.navbar-nav .nav-item:hover > .sub-menu {
+  top: 100%;
+  opacity: 1;
+  visibility: visible;
+}
+
+.navbar-nav .nav-item:hover > .sub-menu .sub-menu {
+  left: 100%;
+  top: 0;
+}
+
+.navbar-nav .nav-item .sub-menu {
+  padding: 30px;
+  min-width: 240px;
+  background: #fff;
+  -webkit-box-shadow: 0px 5px 20px #0000001a;
+          box-shadow: 0px 5px 20px #0000001a;
+  position: absolute;
+  top: 110% !important;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  border-radius: 0 0 4px 4px;
+  border-radius: 5px;
+}
+
+.navbar-nav .nav-item:hover .sub-menu {
+  top: 100% !important;
+}
+
+.navbar-nav .nav-item .sub-menu .nav-item {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.navbar-nav .nav-item .sub-menu .nav-item:last-child {
+  margin: 0;
+}
+
+.navbar-nav .nav-item .sub-menu .nav-item a {
+  padding: 0;
+  color: #888;
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+  position: relative;
+  z-index: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+}
+
+.navbar-nav .nav-item .sub-menu .nav-item a:hover {
+  color: #ff6b81;
+}
+
+.navbar-nav .nav-item .sub-menu.left-menu {
+  left: -100%;
+}
+
+.navbar-nav .nav-item .sub-menu.collapse:not(.show) {
+  display: block;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .navbar-nav .nav-item .sub-menu.collapse:not(.show) {
+    display: none;
+  }
+}
+
+.navbar-nav .nav-item .sub-menu > li {
+  display: block;
+  margin-left: 0;
+}
+
+.navbar-nav .nav-item .sub-menu > li:last-child {
+  border: none;
+}
+
+.navbar-nav .nav-item .sub-menu > li.active > a {
+  color: #ff6b81 !important;
+}
+
+.navbar-nav .nav-item .sub-menu > li > a {
+  font-weight: 400;
+  display: block;
+  padding: 12px 15px;
+  font-size: 14px;
+  color: #222;
+  font-weight: 400;
+}
+
+.navbar-nav .nav-item .sub-menu > li:first-child a {
+  border: none;
+}
+
+.add-list-button {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.add-list-button .btn i {
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/*======================================
+     End Header CSS
+  ========================================*/
+/*======================================
+    Hero Area CSS
+========================================*/
+.hero-area {
+  position: relative;
+  padding:50px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area {
+    padding: 150px 0 60px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area {
+    padding: 120px 0 50px 0;
+  }
+}
+
+.hero-area .hero-image img {
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area .hero-image {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area .hero-image {
+    margin-top: 40px;
+  }
+}
+
+.hero-area .hero-content {
+  border-radius: 0;
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
+
+.hero-area .hero-content h1 {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 50px;
+  color: #373F47;
+  text-shadow: 0px 3px 8px #00000017;
+  text-transform: capitalize;
+}
+
+.hero-area .hero-content h1 span {
+  display: block;
+}
+
+.hero-area .hero-content p {
+  margin-top: 30px;
+  font-size: 15px;
+  color: #373F47;
+}
+
+.hero-area .hero-content .button {
+  margin-top: 40px;
+}
+
+.hero-area .hero-content .button .btn {
+  background-color: #fff;
+  color: #ff6b81;
+  margin-right: 12px;
+}
+
+.hero-area .hero-content .button .btn i {
+  font-size: 17px;
+}
+
+.hero-area .hero-content .button .btn:hover {
+  background-color: #081828;
+  color: #fff;
+}
+
+.hero-area .hero-content .button .btn.btn-alt {
+  background-color: #ffffff6b;
+  color: #fff;
+}
+
+.hero-area .hero-content .button .btn.btn-alt:hover {
+  background-color: #fff;
+  color: #ff6b81;
+}
+
+@media (max-width: 767px) {
+  .hero-area .hero-content .button .video-button {
+    margin-top: 20px;
+  }
+}
+
+.hero-area .hero-content .button .video-button .text {
+  display: inline-block;
+  margin-left: 15px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.hero-area .hero-content .button .video-button:hover .video {
+  color: #fff;
+  background-color: #081828;
+}
+
+.hero-area .hero-content .button .video-button .video {
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #ff6b81;
+  background-color: #fff;
+  border-radius: 50%;
+  margin-left: 10px;
+  font-size: 16px;
+  padding-left: 3px;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  position: relative;
+}
+
+.hero-area .hero-content .button .video-button .video:before {
+  position: absolute;
+  content: '';
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  -webkit-animation: pulse-border-2 2s linear infinite;
+  animation: pulse-border-2 2s linear infinite;
+}
+
+@-webkit-keyframes pulse-border {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-border {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes pulse-border-2 {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-border-2 {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .hero-area .hero-content h1 {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area .hero-content {
+    text-align: center;
+  }
+  .hero-area .hero-content h1 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 38px;
+  }
+  .hero-area .hero-content p {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area .hero-content {
+    padding: 0 10px;
+    text-align: center;
+  }
+  .hero-area .hero-content h1 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .hero-area .hero-content p {
+    margin-top: 15px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .hero-area .hero-content .button .btn {
+    width: 60%;
+    margin: 0;
+    margin-bottom: 7px;
+  }
+  .hero-area .hero-content .button .btn:last-child {
+    margin: 0;
+  }
+}
+
+/*======================================
+    Features Area CSS
+========================================*/
+.features {
+  background-color: white;
+}
+
+.features .single-features {
+  width: 100%;
+  text-align: center;
+  padding: 50px;
+  background-image: url('/assets/images/hero/images4.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-radius: 6px;
+  position: relative;
+  transform: translate(0%, 50%);
+  margin-top: 30px;
+  border: 1px solid #eee;
+  -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+}
+
+.features .single-features h3 {
+  color: #fff;
+  text-align: center;
+  font-size: 38px;
+  font-weight: 800;
+
+}
+
+
+
+
+.features .single-feature {
+  text-align: left;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 6px;
+  position: relative;
+  margin-top: 30px;
+  border: 1px solid #eee;
+  -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s;
+}
+
+.features .single-feature:hover {
+  -webkit-box-shadow: 0px 3px 5px #00000017;
+          box-shadow: 0px 3px 5px #00000017;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+}
+
+.features .single-feature i {
+  height: 60px;
+  width: 60px;
+  line-height: 60px;
+  text-align: center;
+  display: inline-block;
+  background-color: #ff6b81;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 7px;
+  -webkit-box-shadow: 0px 4px 6px #0000002a;
+          box-shadow: 0px 4px 6px #0000002a;
+  margin-bottom: 30px;
+}
+
+.features .single-feature h3 {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.features .single-feature p {
+  line-height: 22px;
+}
+/*======================================
+    Our Achievement CSS
+========================================*/
+.our-achievement {
+  background-color: #F5FAFF;
+  text-align: center;
+  color: #373F47;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .our-achievement {
+    padding: 80px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .our-achievement {
+    padding: 60px 0;
+  }
+}
+
+.our-achievement .title h2 {
+  color: #373F47;
+  font-weight: 700;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.our-achievement .title p {
+  color: #373F47;
+}
+
+.our-achievement .single-achievement {
+  margin-top: 50px;
+  text-align: center;
+  padding: 0px 10px;
+}
+
+.our-achievement .single-achievement h3 {
+  font-size: 35px;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 5px;
+  color: #373F47;
+}
+
+.our-achievement .single-achievement p {
+  font-size: 15px;
+  color: #373F47;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .our-achievement .title h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .our-achievement .single-achievement {
+    margin-top: 30px;
+  }
+  .our-achievement .single-achievement h3 {
+    font-size: 28px;
+  }
+}
+
+/*======================================
+    Call To Action CSS
+========================================*/
+.call-action {
+  background-color: #ff6b81;
+}
+
+.call-action .cta-content {
+  text-align: center;
+  padding: 0px 50px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .call-action .cta-content {
+    padding: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .call-action .cta-content {
+    padding: 0;
+  }
+}
+
+.call-action .cta-content h2 {
+  color: #373F47;
+  line-height: 50px;
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .call-action .cta-content h2 {
+    font-size: 32px;
+    line-height: 45px;
+  }
+}
+
+@media (max-width: 767px) {
+  .call-action .cta-content h2 {
+    font-size: 25px;
+    line-height: 35px;
+  }
+}
+
+.call-action .cta-content p {
+  color: #373F47;
+  padding: 0px 50px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .call-action .cta-content p {
+    padding: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .call-action .cta-content p {
+    padding: 0;
+  }
+}
+
+.call-action .cta-content .button {
+  margin-top: 40px;
+}
+
+.call-action .cta-content .button .btn {
+  background-color: #fff;
+  color: #ff6b81;
+}
+
+.call-action .cta-content .button .btn:hover {
+  color: #fff;
+  background-color: #081828;
+}
+
+/*======================================
+	Error 404 CSS
+========================================*/
+.error-area {
+  height: 100vh;
+  text-align: center;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  position: relative;
+}
+
+.d-table {
+  width: 100%;
+  height: 100%;
+}
+
+.d-table {
+  display: table !important;
+}
+
+.d-table-cell {
+  vertical-align: middle;
+}
+
+.d-table-cell {
+  display: table-cell !important;
+}
+
+.error-area .error-content h1 {
+  font-size: 100px;
+  color: #ff6b81;
+  margin-bottom: 25px;
+  font-weight: 800;
+  line-height: 100px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .error-area .error-content h1 {
+    font-size: 60px;
+    line-height: 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  .error-area .error-content h1 {
+    font-size: 45px;
+    line-height: 30px;
+  }
+}
+
+.error-area .error-content h2 {
+  font-size: 25px;
+  margin-bottom: 10px;
+  color: #081828;
+  font-weight: 700;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .error-area .error-content h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 767px) {
+  .error-area .error-content h2 {
+    font-size: 18px;
+  }
+}
+
+.error-area .error-content p {
+  font-weight: 400;
+  margin-bottom: 40px;
+  color: #888;
+}
+
+
+
+.section_padding_130 {
+    padding-top: 130px;
+    padding-bottom: 130px;
+}
+.faq_area {
+    position: relative;
+    z-index: 1;
+    background-color: #f5f5ff;
+}
+
+.faq-accordian {
+    position: relative;
+    z-index: 1;
+}
+.faq-accordian .card {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+}
+.faq-accordian .card:last-child {
+    margin-bottom: 0;
+}
+.faq-accordian .card .card-header {
+    background-color: #ffffff;
+    padding: 0;
+    border-bottom-color: #ebebeb;
+}
+.faq-accordian .card .card-header h6 {
+    cursor: pointer;
+    padding: 1.75rem 2rem;
+    color: #3f43fd;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -ms-grid-row-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.faq-accordian .card .card-header h6 span {
+    font-size: 1.5rem;
+}
+.faq-accordian .card .card-header h6.collapsed {
+    color: #070a57;
+}
+.faq-accordian .card .card-header h6.collapsed span {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+.faq-accordian .card .card-body {
+    padding: 1.75rem 2rem;
+}
+.faq-accordian .card .card-body p:last-child {
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 575px) {
+    .support-button p {
+        font-size: 14px;
+    }
+}
+
+.support-button i {
+    color: #3f43fd;
+    font-size: 1.25rem;
+}
+@media only screen and (max-width: 575px) {
+    .support-button i {
+        font-size: 1rem;
+    }
+}
+
+.support-button a {
+    text-transform: capitalize;
+    color: #2ecc71;
+}
+@media only screen and (max-width: 575px) {
+    .support-button a {
+        font-size: 13px;
+    }
+}
+    </style>
 
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-      <p class="browserupgrade">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
-      </p>
-    <![endif]-->
 
     <!-- Preloader -->
     <div class="preloader">
@@ -40,20 +1646,20 @@
         <section class="our-achievement section">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
+                    <div class="col-lg-12 col-md-12 col-12">
                         <div class="title">
                             <h2 style="color: #017EF3;">O2X, Connecting the Best</h2><h2>of Both Worlds!</h2>
                             <p>WAOBoost, Trusted Odoo Gold Partner in Australia & New Zealand.</p>
                             <img src="/assets/images/hero/images1.png" alt="" width="1012px" height="128px">
                         </div>
                     </div>
-                    <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
-                        <img src="/assets/images/hero/images2.png" alt="" srcset="" width="1024px" height="762px">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <img src="/assets/images/hero/images2.png" width="1012px" alt="" srcset="">
                     </div>
                 </div>
     
                 <div class="row" style="margin-bottom: 40px;">
-                    <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
+                    <div class="col-lg-12 col-md-12 col-12">
                         <div class="title">
                             <h2>Are You a Product-Based Xero User <br/>With a Vision to Grow?</h2>
                             <p>Does the sound of a comprehensive ERP solution tempt you,
@@ -64,7 +1670,7 @@
                 </div>
     
                 <div class="row">
-                    <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
+                    <div class="col-lg-12 col-md-12 col-12">
                         <div class="title">
                             <h2>What's More?</h2>
                             <p>If your business expands and you encounter Xero's limitations,<br/> transitioning to Odoo accounting becomes seamless.</p>
@@ -83,7 +1689,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="cta-content button wow fadeInUp">
-                        <img src="/assets/images/hero/images3.png" alt="" srcset="" width="1024px" height="569px">
+                        <img src="/assets/images/hero/images3.png" alt="" srcset="">
                         <h2 class="wow fadeInUp" data-wow-delay=".2s">Jump in & Let’s Give it a Try!
                         </h2>
                         <a href="javascript:void(0)" class="btn" style="background-color: #E14E59; color: white;">Demo</a>
@@ -120,13 +1726,13 @@
     <section id="home" class="hero-area" style="background-color: #ECFBFE;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-5 col-md-12 col-12">
+                <div class="col-lg-5 col-md-12 col-12" style="margin-top: 50px;">
                     <div class="hero-content">
                         <h1 class="wow fadeInLeft" data-wow-delay=".4s" style="color: #017EF3;">Streamline Data </h1><h1>Import & Export.</h1>
                         <p class="wow fadeInLeft" data-wow-delay=".6s">Import or export a wide array of data such as invoices, bills, credit notes, payments & refunds, tracking categories, Chart of Accounts & tax codes, between Odoo and Xero, promoting seamless data management.</p>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12">
+                <div class="col-lg-6 col-md-12 col-12">
                     <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
                         <img src="assets/images/hero/images5.png" alt="#">
                     </div>
@@ -139,12 +1745,12 @@
     <section id="home" class="hero-area" style="background-color: #123F6A;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-7 col-md-12 col-12">
+                <div class="col-lg-6 col-md-12 col-12">
                     <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
                         <img src="assets/images/hero/images6.png" alt="#">
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-12 col-12">
+                <div class="col-lg-5 col-md-12 col-12" style="margin-top: 50px;">
                     <div class="hero-content">
                         <h1 class="wow fadeInLeft" data-wow-delay=".4s" style="color: #A8CDF0;">Eradicate Manual</h1> <h1 style="color: #fff;"> Entry Hassles.</h1>
                         <p class="wow fadeInLeft" data-wow-delay=".6s" style="color: #fff;">No more manual data entry! The O2X integration facilitates a smooth, two-way data flow, saving time, minimising errors, and ensuring the accuracy of financial information.</p>
@@ -159,13 +1765,13 @@
     <section id="home" class="hero-area" style="background-color: #FCEEEF;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-5 col-md-12 col-12">
+                <div class="col-lg-5 col-md-12 col-12" style="margin-top: 50px;">
                     <div class="hero-content">
                         <h1 class="wow fadeInLeft" data-wow-delay=".4s" style="color: #017EF3;">Real-time Data</h1> <h1> Harmony.</h1>
                         <p class="wow fadeInLeft" data-wow-delay=".6s">Achieve real-time synchronisation for crucial data including stock journals, stock adjustment journals, Cost Of Goods Sold, invoices, credit notes and vendor bills through seamless integration with Xero.</p>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12">
+                <div class="col-lg-6 col-md-12 col-12">
                     <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
                         <img src="assets/images/hero/images7.png" alt="#">
                     </div>
@@ -177,12 +1783,12 @@
     <section id="home" class="hero-area" style="background-color: #2D3339;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-7 col-md-12 col-12">
+                <div class="col-lg-6 col-md-12 col-12">
                     <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
                         <img src="assets/images/hero/images8.png" alt="#">
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-12 col-12">
+                <div class="col-lg-5 col-md-12 col-12" style="margin-top: 50px;">
                     <div class="hero-content">
                         <h1 class="wow fadeInLeft" data-wow-delay=".4s" style="color: #A8CDF0;">Frequency for</h1> <h1 style="color: #fff;"> Each Process.</h1>
                         <p class="wow fadeInLeft" data-wow-delay=".6s"  style="color: #fff;">From syncing contacts to invoices, payments, and more, steer your ship and program the system to run syncs more frequently or less frequently as per your requirement.</p>
@@ -197,13 +1803,13 @@
     <section id="home" class="hero-area" style="background-color: #FCF2ED;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-5 col-md-12 col-12">
+                <div class="col-lg-5 col-md-12 col-12" style="margin-top: 50px;">
                     <div class="hero-content">
                         <h1 class="wow fadeInLeft" data-wow-delay=".4s" style="color: #017EF3;">eCommerce </h1> <h1>Transaction Data Flow.</h1> 
                         <p class="wow fadeInLeft" data-wow-delay=".6s">Receive batched e-commerce transactions to reduce the number of transactions flowing into the system to avoid system clogs.</p>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12">
+                <div class="col-lg-6 col-md-12 col-12">
                     <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
                         <img src="assets/images/hero/images9.png" alt="#">
                     </div>
@@ -218,12 +1824,12 @@
     <section id="home" class="hero-area" style="background-color: #123F6A;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-7 col-md-12 col-12">
+                <div class="col-lg-6 col-md-12 col-12">
                     <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
                         <img src="assets/images/hero/images10.png" alt="#">
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-12 col-12">
+                <div class="col-lg-5 col-md-12 col-12" style="margin-top: 50px;">
                     <div class="hero-content">
                         <h1 class="wow fadeInLeft" data-wow-delay=".4s" style="color: #A8CDF0;">Sync Error</h1> <h1 style="color: #fff;"> Notifications.</h1>
                         <p class="wow fadeInLeft" data-wow-delay=".6s"  style="color: #fff;">Get notified via email when errors prevent data syncs between the two systems. While successful syncs will appear in green, unsuccessful syncs will appear in red.</p>
@@ -238,13 +1844,13 @@
     <section id="home" class="hero-area" style="background-color: #ECFBFE;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-5 col-md-12 col-12">
+                <div class="col-lg-5 col-md-12 col-12" style="margin-top: 50px;">
                     <div class="hero-content">
                         <h1 class="wow fadeInLeft" data-wow-delay=".4s" style="color: #017EF3;">Increased </h1> <h1> Departmental Collaboration.</h1>
                         <p class="wow fadeInLeft" data-wow-delay=".6s">Bridge departmental gaps and facilitate the seamless flow of information, fostering better collaboration across your organization.</p>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12">
+                <div class="col-lg-6 col-md-12 col-12">
                     <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
                         <img src="assets/images/hero/images9.png" alt="#">
                     </div>
@@ -396,7 +2002,7 @@
     <div class="faq_area section_padding_130" id="faq">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-sm-8 col-lg-6">
+                <div class="col-12 col-sm-8 col-lg-12">
                     <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                     <a href="javascript:void(0)" class="btn" style="background-color: #017EF3; color: white;">FAQ's</a>
                         <a href="javascript:void(0)" class="btn" style="background-color: white; color: #017EF3;">Updates</a>
@@ -408,7 +2014,7 @@
             </div>
             <div class="row justify-content-center">
                 <!-- FAQ Area-->
-                <div class="col-12 col-sm-10 col-lg-8">
+                <div class="col-12 col-sm-10 col-lg-12">
                     <div class="accordion faq-accordian" id="faqAccordion">
                         <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                             <div class="card-header" id="headingOne">
@@ -466,7 +2072,7 @@
     <section id="home" class="hero-area" style="background-color: #ECFBFE;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-12 col-md-12 col-12">
+                <div class="col-lg-11 col-md-12 col-12">
                     <div class="hero-content">
                        <h4 class="wow fadeInLeft" data-wow-delay=".6s">Please log in to comment on this module</h4>
                        <ul>
@@ -484,17 +2090,20 @@
         </div>
     </section>
 
-    <img src="/assets/images/hero/images11.png" alt="">
+    <img src="/assets/images/hero/images11.png" alt="" width="1200px">
+    <div class="container">
+    </div>
+
     <!-- ========================= scroll-top ========================= -->
-    <a href="#" class="scroll-top">
+    <!-- <a href="#" class="scroll-top">
         <i class="lni lni-chevron-up"></i>
-    </a>
+    </a> -->
 
     <!-- ========================= JS here ========================= -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <script src="assets/js/main.js"></script> -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
 
         //====== counter up 
